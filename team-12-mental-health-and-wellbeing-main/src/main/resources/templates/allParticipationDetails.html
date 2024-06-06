@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AllParticipitonDetails</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <th:block th:include="fragments/common :: head"></th:block>
+</head>
+<body>
+<header th:replace="fragments/common :: header"></header>
+<div class="container">
+    <main>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                <td>participation_id</td>
+                <td>user_name</td>
+                <td>event_id</td>
+                <td>participation_date</td>
+                <td>delete</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="participation: ${participations}">
+                    <td th:text="${participation.participation_id}"></td>
+                    <td th:text="${participation.user_name}"></td>
+                    <td th:text="${participation.event_id}"></td>
+                    <td th:text="${participation.participation_date}"></td>
+                    <td><button class="btn-danger" th:attr="onclick=|participant_delete(${participation.participation_id})|" >
+                        delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+
+
+
+
+<footer th:replace="fragments/common :: footer"></footer>
+<script th:replace="fragments/common :: script"></script>
+</body>
+</html>

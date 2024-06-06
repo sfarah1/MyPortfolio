@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GalleryVideo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/StyleY.css}">
+    <style>
+        .photo video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body style="background-color: bisque;">
+<header th:replace="fragments/headerY :: header"></header>
+<!--<div th:replace="fragments/common :: head"></div>-->
+<!--<header th:replace="fragments/common :: navbar"></header>-->
+
+<h1 class="head"> Gallery </h1>
+
+<!-- carousel -->
+<div class="jumbotron News">
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1" ></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2" ></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="#"><img class="d-block w-100" src="/img/client1.jpg" alt="First slide" title="News1"></a>
+                    <div class="carousel-caption">
+                        <h5>1st </h5>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img class="d-block w-100" src="/img/client1.jpg" alt="Second slide" title="News2"></a>
+                    <div class="carousel-caption">
+                        <h5>2nd </h5>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img class="d-block w-100" src="/img/client1.jpg" alt="Third slide" title="News3"></a>
+                    <div class="carousel-caption">
+                        <h5>3rd </h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+
+<!--all videos-->
+<div class="container">
+    <h1 style="text-align: center; color: cornflowerblue" >videos</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2" th:each="video,status: ${g_video}">
+                <div class="row" th:if="${status.odd}">
+                    <div class="col-md-6 photo" style="height: 250px; padding: 0px">
+                        <video th:src="${video.galleryVideoPath}" width="100px" height="100px"
+                                controls preload></video>
+                    </div>
+                    <div class="col-md-6 bg-warning d-none d-md-flex">
+                        <div class="row">
+                             <p th:text="${video.comment}"></p>
+                        </div>
+                        <div class="row upTime">
+                            <span  class="row">
+                                <p th:text="${video.upTime}" class="text-muted"></p> <p>&nbsp|&nbsp</p>
+                                <p th:text="${video.owner}" class="text-muted"></p> <p>&nbsp|&nbsp</p>
+                                <a th:href="'SearchGalleryVideo/?id='+ ${video.id}" target="_blan">comments</a>
+                                </span>
+                            <p>&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+                            <form action='/public/liked/gallery/video' method = 'get'>
+                                <input type = "hidden" name = "id" th:value="${video.id}">
+                                <button type = "submit" class="permit-button"> liked </button>
+                                <span th:text="${video.liked}"></span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" th:if="${status.even}">
+                    <div class="col-md-6 bg-warning d-none d-md-flex">
+                        <div class="row">
+                            <p th:text="${video.comment}"></p>
+                        </div>
+                        <div class="row upTime">
+                            <span  class="row">
+                                <p th:text="${video.upTime}" class="text-muted"></p> <p>&nbsp|&nbsp</p>
+                                <p th:text="${video.owner}" class="text-muted"></p> <p>&nbsp|&nbsp</p>
+                                <a th:href="'SearchGalleryVideo/?id='+ ${video.id}" target="_blan">comments</a>
+                                </span>
+                            <p>&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+                            <form action='/public/liked/gallery/video' method = 'get'>
+                                <input type = "hidden" name = "id" th:value="${video.id}">
+                                <button type = "submit" class="permit-button"> liked </button>
+                                <span th:text="${video.liked}"></span>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 photo" style="height: 250px; padding: 0px">
+                        <video th:src="${video.galleryVideoPath}" width="100px" height="100px"
+                               controls preload></video>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <aside>
+        <div style="float: left">
+            <span class="blink" style="position: fixed; bottom: 110px;">
+                <form action='/public/gallery' method = 'get'>
+                    <button type = "submit" class="convert-button"> photos </button>
+                </form>
+            </span>
+        </div>
+    </aside>
+    <hr style="border-color:red">
+    <div style="text-align: center">
+        <form action='/register/addThingsToGallery/' method = 'get'>
+            <button type = "submit" class="btn btn-success"> click here to add new things </button>
+        </form>
+    </div>
+</div>
+<hr>
+
+<!--pagination-->
+<div class="container">
+    <div class="col-md-8 offset-md-2">
+        <div class="row" style="text-align: center">
+            <div>
+                <form action='/public/galleryVideoPrevious' method = 'get'>
+                    <button type = "submit" class="btn btn-primary"> previous page </button>
+                </form>
+            </div>
+            <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp
+                <span style="color: #006fe6" th:object="${page}">
+                    Page: <span th:text="*{pageNum}"></span><span>/<span th:text="*{pageTotal}"></span></span>
+                </span>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+            <div class="float-right" style="float: right">
+                <form id='myForm' action='/public/galleryVideoNext' method = 'get' class="float-right">
+                    <button type = "submit" class="btn btn-primary float-right"> next page </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function blink() {
+        $('.blink').fadeOut(500);
+        $('.blink').fadeIn(500);
+    }
+    setInterval(blink, 1500);
+</script>
+
+<!--<div th:replace="fragments/common :: foot"></div>-->
+<footer th:replace="fragments/footerY :: footer"></footer>
+</body>
+</html>

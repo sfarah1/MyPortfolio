@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>singleVideo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/StyleY.css}">
+</head>
+<body style="background-color: bisque;">
+<header th:replace="fragments/headerY :: header"></header>
+<!--<header th:replace="fragments/common :: navbar"></header>-->
+
+<div class="container">
+    <div class="col-md-8 offset-md-2">
+        <div style="height:400px; width: 730px;" class="row">
+            <video th:src="${galleryVideoDTO.galleryVideoPath}" width="100%"
+                   height="100%" controls preload style="text-align: center;">
+            </video>
+        </div>
+        <hr style="border-color:royalblue">
+        <article>
+            <div class="row">
+                <p th:text="${galleryVideoDTO.comment}"></p>
+            </div>
+            <div class="row">
+                <span class="row" style="float:right;">
+                <p th:text="${galleryVideoDTO.upTime}" class="text-muted"></p> <p>&nbsp|&nbsp</p>
+                <p th:text="${galleryVideoDTO.owner}" class="text-muted"></p>
+                </span>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+                <form action='/public/liked/gallery/video' method = 'get'>
+                    <input type = "hidden" name = "id" th:value="${galleryVideoDTO.id}">
+                    <button type = "submit" class="permit-button"> liked </button>
+                    <span th:text="${galleryVideoDTO.liked}"></span>
+                </form>
+            </div>
+        </article>
+    </div>
+</div>
+
+<hr><hr>
+<div class="container">
+    <div class="col-md-8 offset-md-2">
+        <h2 style="text-align: center; color: blueviolet">Comments:</h2>
+        <div class="bg-warning" style="height: 250px; overflow-y: scroll;">
+            <br><br>
+            <div th:each="message, status:${g_vmessage}" >
+                <div th:if="${status.odd}">
+                    <p th:text="${message.message}" style="color: #5b40eb"></p><hr>
+                </div>
+                <div th:if="${status.even}">
+                    <p th:text="${message.message}" style="color: #9f236f"></p><hr>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <form action='/public/leaveVideoMessage/' method = 'post'>
+                <label>You can make comment here: <br>
+                    <textarea type="text" name = "message" rows="3" cols="100" placeholder="Write Something"></textarea>
+                </label>
+                <input type="hidden" name="g_videoID" th:value="${galleryVideoDTO.id}">
+                <button type = "submit" class="btn btn-success" > Submit </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<div th:replace="fragments/common :: foot"></div>-->
+<footer th:replace="fragments/footerY :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>resource</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/StyleY.css}">
+
+</head>
+<body style="background-color: bisque;">
+<header th:replace="fragments/headerY :: header"></header>
+<!--<header th:replace="fragments/common :: navbar"></header>-->
+
+<h1 class="head"> Resources </h1>
+
+<!-- carousel -->
+<div class="jumbotron News">
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1" ></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2" ></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="#"><img class="d-block w-100" src="/img/client1.jpg" alt="First slide" title="News1"></a>
+                    <div class="carousel-caption">
+                        <h5>1st </h5>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img class="d-block w-100" src="/img/client1.jpg" alt="Second slide" title="News2"></a>
+                    <div class="carousel-caption">
+                        <h5>2nd </h5>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img class="d-block w-100" src="/img/client1.jpg" alt="Third slide" title="News3"></a>
+                    <div class="carousel-caption">
+                        <h5>3rd </h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+
+<!-- video -->
+<div class="container ">
+    <h1 style="text-align: center; color: blueviolet">video resources</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-1 bg-warning" >
+            <div class="row">
+                <div class="container">
+                    <div class="">
+                        <h2 style="text-align: center; color: #007bff">Introduction</h2>
+                        <iframe width="500" height="250" src="https://www.youtube.com/embed/ohpEsitFkDY" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aside class="col-md-4 pre-scrollable" style="background-color: skyblue;" >
+            <h2 style="text-align: center; color: #ad1535;">latest videos</h2>
+
+                <div class="container">
+                    <div class="" th:each="video,status: ${videos}" th:if = "${status.index} lt 5">
+                        <div class="row">
+                            <div class="col-md-12 photo" style="height: 250px; padding: 0px;">
+                                <a th:href="'SearchVideo/?id='+ ${video.id}" >
+                                    <img th:src="${video.coverPath}"
+                                         th:alt="${video.videoPath}" th:title="${video.videoTitle}">
+                                </a>
+                                <h5 th:text= "${video.videoTitle}"></h5>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+        </aside>
+    </div>
+</div>
+<hr style="border-color:red">
+
+<!-- panel -->
+<div class="container" >
+    <div class="col-md-8 offset-md-2" style="background-color: #d7fae9">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                           aria-expanded="true" aria-controls="collapseOne" >
+                            Please tell us if you have some warning signs below so that we can provide you appropriate resources
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 offset-md-2 upcomingEvents">
+                                    <h2 style="text-align: center">Mental health warning signs </h2><br>
+                                    <form name="myForm" action="/public/scale" method="GET" onsubmit="return validate()">
+                                        <div class="container question">
+                                            <div class="row">
+                                                <div class="col-md-6" style="text-align: center">
+                                                    Insomnia: <label>yes<input type="radio" name="insomnia" value="1"></label> <label>no<input type="radio" name="insomnia" value="0"></label>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: center">
+                                                    Stress:  <label>yes<input type="radio" name="stress" value="1"></label> <label>no<input type="radio" name="stress" value="0"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6" style="text-align: center">
+                                                    Anorexic: <label>yes<input type="radio" name="anorexic" value="1"></label> <label>no<input type="radio" name="anorexic" value="0"></label>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: center">
+                                                    Isolation:  <label>yes<input type="radio" name="isolation" value="1"></label> <label>no<input type="radio" name="isolation" value="0"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8" style="text-align: center">
+                                                    Suicidal tendency: <label>yes<input type="radio" name="suicidal" value="2"></label> <label>no<input type="radio" name="suicidal" value="0"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="text-align: center">
+                                            <input type="submit" class="my-button">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div th:replace="fragments/common :: foot"></div>-->
+<footer th:replace="fragments/footerY :: footer"></footer>
+<script>
+    function validate() {
+        var pass = true;
+        var insomnia = $("[name = 'insomnia']:checked");
+        var stress = $("[name = 'stress']:checked");
+        var anorexic = $("[name = 'anorexic']:checked");
+        var isolation = $("[name = 'isolation']:checked");
+        var suicidal = $("[name = 'suicidal']:checked");
+        // if ((!insomnia.length) || (!stress.length) || (!anorexic.length) || (isolation.length) || (suicidal.length))
+        if (!insomnia.length) {
+            alert("please select the situation of insomnia")
+            pass = false;
+        } if (!stress.length) {
+            alert("please select the situation of stress")
+            pass = false;
+        } if (!anorexic.length) {
+            alert("please select the situation of anorexic")
+            pass = false;
+        } if (!isolation.length) {
+            alert("please select the situation of isolation")
+            pass = false;
+        } if (!suicidal.length) {
+            alert("please select the situation of suicidal tendency")
+            pass = false;
+        }
+        return pass;
+    }
+</script>
+</body>
+</html>
