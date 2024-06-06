@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin="anonymous">
+    <th:block th:include="fragments/common :: head"></th:block>
+    <link rel="stylesheet" th:href="@{/css/shards.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <title>About Us</title>
+</head>
+
+<body>
+    <header th:replace="fragments/common :: header"></header>
+
+    <section class="container-fluid px-0">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div id="headingGroup" class="text-white text-center d-none d-lg-block mt-5">
+                    <h1 class=""> About Us</h1>
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img id="firstImage" class="img-fluid" th:src="@{/img/mental-image1.jpg}" >
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid px-0">
+        <div class="row align-items-center content">
+            <div class="col-md-6 order-2 order-md-1">
+                <img class="img-fluid" th:src="@{/img/mental-image2.jfif}" >
+            </div>
+            <div class="col-md-6 text-center order-1 order-md-2">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-lg-8 blurb mb-5 mb-md-0">
+                        <h2>Are you Ok?</h2>
+                        <img th:src="@{/img/mental-healthicon.png}" alt="" class="d-none d-lg-inline" width="50" height="50">
+                        <p class="lead">It's ok not to be ok. We all have our ups and downs, it's a part of what makes
+                            us human. Your feelings and emotions are not your enemy. They are not things that you must
+                            repress and ignore. They should be expressed, embraced and acknowledged. A problem shared
+                            is a problem halved. And that's where we come in.
+                            .</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center content">
+            <div class="col-md-6 text-center">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-lg-8 blurb mb-5 mb-md-0">
+                        <h2>Who are we</h2>
+                        <img th:src="@{/img/mental-healthicon.png}" alt="" class="d-none d-lg-inline" width="50" height="50">
+                        <p class="lead">We are a mental health support group based in Wales and are committed to
+                            supporting others with overcoming the challenges linked to mental health and substance misuse. Founded
+                            by Matthew Creel, the tidy butt team comprises a number of ambassadors that are driven to promote the
+                            support group. Such ambassadors include former-Welsh international rugby player, Rhys Thomas and
+                            others.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img th:src="@{/img/tidy-butt-picofteam.JPG}" alt="will not show" class="img-fluid">
+            </div>
+        </div>
+        <div class="row align-items-center content">
+            <div class="col-md-6 order-2 order-md-1">
+                <img th:src="@{/img/mental-image3.jpg}" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-6 text-center order-1 order-md-2">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-lg-8 blurb mb-5 mb-md-0">
+                        <h2>Don't suffer in silence</h2>
+                        <img th:src="@{/img/mental-healthicon.png}" alt="" class="d-none d-lg-inline" width="50" height="50">
+                        <p class="lead">Now, more than ever, many of us are feeling the strain of the pandemic on our mental health.
+                            After long months of intermittent lockdowns, you may have noticed you’ve been feeling lethargic,
+                            sluggish or even lost confidence – particularly if you’ve been shielding. These are all signs that,
+                            maybe, things aren’t so great. But that’s okay, and in these times, perfectly normal.
+                            However, it’s still possible to do something about it. You wouldn’t ignore the symptoms of a
+                            physical medical problem, so why ignore the symptoms of poor mental health?.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mb-4 " >
+
+
+          <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+
+          <p class="text-center w-responsive mx-auto mb-5">Have you got any queries? Use the comment box below and we will get back to you as soon as possible</p>
+
+            <div class="row">
+
+
+              <div class="container col-md-9 mb-md-0 mb-5" >
+<!--                <form id="contact-form" name="contact-form" action="#" th:action="@{/AboutUs}" th:object="${aboutUs}" method="post">-->
+                  <form id="contact-form" name="contact-form" th:action="@{/AboutUs}" method="post">
+
+                  <div class="row">
+
+
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                          <input type="text" id="name"  name="name" class="form-control" required minlength="2"/>
+                        <label for="name" class="">Name</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="email" id="email" name="email" class="form-control" required minlength="3">
+                        <label for="email" class="">Email</label>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="md-form mb-0">
+                        <input type="text" id="subject" name="subject" class="form-control" required minlength="4">
+                        <label for="subject" class="">Subject</label>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+
+
+                    <div class="col-md-12">
+
+                      <div class="md-form">
+                        <textarea id="message" rows="5" name="messageInput" class="form-control md-textarea" required minlength="5"></textarea>
+                        <label for="message">Your message</label>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+
+                      <div class="text-center text-md-center">
+                          <input type="submit" value="Send" class="btn btn-primary">
+                      </div>
+
+
+                  </form>
+              </div>
+
+
+
+<!--                <div class="text-center text-md-center">-->
+<!--                  <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>-->
+<!--                </div>-->
+<!--                <div class="status"></div>-->
+<!--              </div>-->
+
+
+            </div>
+
+          </section>
+
+
+
+
+    </section>
+
+    <footer th:replace="fragments/common :: footer"></footer>
+
+    <script th:replace="fragments/common :: script"></script>
+
+</body>
+
+</html>

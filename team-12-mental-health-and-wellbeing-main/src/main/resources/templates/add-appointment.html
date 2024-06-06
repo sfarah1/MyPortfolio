@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add Appointment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:include="fragments/common :: head"></th:block>
+</head>
+<body>
+<header th:insert="fragments/common :: header"></header>
+<div class="container my-5">
+    <h2 class="mb-5">Add Appointment</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="#" th:action="@{/admin/appointments/add}" th:object="${appointment}" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="date" class="col-form-label">Date</label>
+                        <input type="text" th:field="*{date}" class="form-control" id="date" placeholder="Date">
+                        <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="startTime" class="col-form-label">Start Time</label>
+                        <input type="text" th:field="*{startTime}" class="form-control" id="startTime" placeholder="Start Time">
+                        <span th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="endTime" class="col-form-label">End Time</label>
+                        <input type="text" th:field="*{endTime}" class="form-control" id="endTime" placeholder="End Time">
+                        <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mt-5">
+                        <input type="submit" class="btn btn-primary" value="Add Appointment">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
+<script th:replace="fragments/common :: script"></script>
+</body>
+</html>

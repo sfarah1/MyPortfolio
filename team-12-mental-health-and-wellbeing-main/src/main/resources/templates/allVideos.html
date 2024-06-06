@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>allVideos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/StyleY.css}">
+</head>
+<body style="background-color: bisque;">
+<header th:replace="fragments/headerY :: header"></header>
+<!--<div th:replace="fragments/common :: head"></div>-->
+<!--<header th:replace="fragments/common :: navbar"></header>-->
+
+<div class="container">
+    <h2 style="text-align: center; color: #674eec">
+       You can delete video or recommend video to user with different mental health (ScaleA: good situation; ScaleB bad situation)
+    </h2>
+    <div class="col-md-12">
+        <div class="container" >
+            <h1 style="text-align: center; color: cornflowerblue" >All videos</h1>
+            <div class="row videos">
+                <div class="col-md-4" th:each="video:${videos}">
+                        <video th:poster="${video.coverPath}" th:src="${video.videoPath}" width="100px"
+                               height="100px" controls preload="none">
+                        </video>
+                    <h3 th:text="${video.videoTitle}">title of the video</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><hr>
+<div class="container">
+    <div class="col-md-10 offset-md-1">
+        <h3 style="text-align: center; color: #674eec">
+            flag is "1" means this video is recommended to user with good mental health; "2" means for bad mental health user;
+        </h3>
+        <table class="table table-striped">
+            <tr><td>ID</td><td>videoPath</td><td>coverPath</td><td>videoTitle</td><td>flag</td><td>recommend</td><td>delete</td></tr>
+            <tr th:each="video: ${videos}">
+                <td th:text="${video.id}"></td>
+                <td th:text="${video.videoPath}"></td>
+                <td th:text="${video.coverPath}"></td>
+                <td th:text="${video.videoTitle}"></td>
+                <td th:text="${video.flag}"></td>
+                <td>
+                    <form action='/admin/recommend/scaleA' method = 'get'>
+                        <input type = "hidden" name = "id" th:value="${video.id}">
+                        <button type = "submit" class="recommend-button"> ScaleA </button>
+                    </form>
+                    <form action='/admin/recommend/scaleB' method = 'get'>
+                        <input type = "hidden" name = "id" th:value="${video.id}">
+                        <button type = "submit" class="recommend-button"> ScaleB </button>
+                    </form>
+                    <form action='/admin/cancel/recommend' method = 'get'>
+                        <input type = "hidden" name = "id" th:value="${video.id}">
+                        <button type = "submit" class="recommend-button"> CancelRecommend </button>
+                    </form>
+                </td>
+                <td>
+                    <form action='/admin/delete/video' method = 'get'>
+                        <input type = "hidden" name = "id" th:value="${video.id}">
+                        <button type = "submit" class="delete-button"> delete </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!--<div th:replace="fragments/common :: foot"></div>-->
+<footer th:replace="fragments/footerY :: footer"></footer>
+</body>
+</html>

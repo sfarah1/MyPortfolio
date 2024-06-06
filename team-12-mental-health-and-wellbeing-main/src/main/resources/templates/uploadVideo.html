@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta>
+    <title>videoUpload</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/StyleY.css}">
+</head>
+<body style="background-color: bisque;">
+<header th:replace="fragments/headerY :: header"></header>
+<!--<header th:replace="fragments/common :: navbar"></header>-->
+
+<!-- upload video and image(cover of the video) into the server-->
+<div class="container">
+    <br><br>
+    <h1 class="text-success" style="text-align: center">You can post new videos and their cover images here</h1><br><br><br>
+    <div class="col-md-8 offset-md-2 border border-success">
+        <form action="/admin/upload/video/" method="post" enctype="multipart/form-data" onsubmit="return validate()">
+            <label>video:<input id="video" type="file" name="videoFile" multiple="multiple" accept="video/mp4, video/ogg"></label>
+            <label>cover:<input id="cover" type="file" name="videoFile" multiple="multiple" accept="image/jpeg, image/png"></label>
+            <label>title:<input id="title" type="text" name="videoTitle" placeholder="input the video's title"></label><br>
+            <button type = "submit" class="my-button"> upload into the server </button>
+        </form>
+    </div>
+    <hr>
+    <div class="col-md-8 offset-md-2">
+        <div style="text-align: center">
+            <form id='myForm' action='/admin/manage/videos/' method = 'get'>
+                <button type = "submit" class="btn btn-primary"> manage all videos </button>
+            </form>
+        </div>
+    </div>
+</div><hr>
+
+
+<script>
+    function validate() {
+        var pass = true;
+        var video = document.getElementById("video").value;
+        var cover = document.getElementById("cover").value;
+        var title = document.getElementById("title").value;
+        var words = title.split(" ");
+        if (video === "") {
+            alert("you didn't select a video yet")
+            pass = false;
+        }
+        if (cover === "") {
+            alert("you didn't select a cover image yet")
+            pass = false;
+        }
+        if (title === "") {
+            alert("please give a brief title of this video")
+            pass = false;
+        } else if (words.length>15){
+            alert('the title is too long');
+            pass = false;
+        }
+        return pass;
+    }
+</script>
+<!--<div th:replace="fragments/common :: foot"></div>-->
+<footer th:replace="fragments/footerY :: footer"></footer>
+</body>
+</html>

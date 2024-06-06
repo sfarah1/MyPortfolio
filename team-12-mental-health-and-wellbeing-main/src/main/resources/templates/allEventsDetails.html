@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AllEventDetails</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <th:block th:include="fragments/common :: head"></th:block>
+</head>
+<body>
+<header th:replace="fragments/common :: header"></header>
+<div class="container">
+    <main>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td scope="col">Event_id</td>
+                    <td scope="col">Event_name</td>
+                    <td scope="col">Event_content</td>
+                    <td scope="col">startDate</td>
+                    <td scope="col"> endDate</td>
+                    <td scope="col">imgpath</td>
+                    <td>delete</td>
+                </tr>
+                </thead>
+                <tr th:each="eventdetail: ${eventdetails}">
+                    <td scope="col" class="align-top" th:text="${eventdetail.event_id}" id="[[${eventdetail.event_id}]]"></td>
+                    <td class="align-top" th:text="${eventdetail.event_name}" ></td>
+                    <td class="align-top" th:text="${eventdetail.event_content}"></td>
+                    <td class="align-top" th:text="${eventdetail.startDate}"></td>
+                    <td class="align-top" th:text="${eventdetail.endDate}"></td>
+                    <td class="align-top" th:text="${eventdetail.imgpath}"></td>
+                    <td class="align-top"><button class="btn-danger" th:value="${eventdetail.event_id}" name="event_id"
+                                                  th:onclick="'javascript:delete1('+${eventdetail.event_id}+')'">delete</button></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
+<script th:replace="fragments/common :: script"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Admin Appointment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <th:block th:include="fragments/common :: head"></th:block>
+</head>
+<body>
+<header th:insert="fragments/common :: header"></header>
+<div th:switch="${appointments}" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <p class="my-5"><a href="/admin/appointments/add" class="btn btn-primary">Add <i class="fas fa-plus"></i></a></p>
+      <h2 th:case="null">No appointments yet!</h2>
+      <div th:case="*">
+        <h2 class="my-5">Appointments</h2>
+        <table class="table table-hover table-responsive-md table-bordered">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Booked By</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.date}"></td>
+            <td th:text="${appointment.startTime}"></td>
+            <td th:text="${appointment.endTime}"></td>
+            <td th:text="${appointment.bookedBy}"></td>
+            <td><a th:href="@{/admin/appointments/edit/{id}(id=${appointment.id})}" class="btn btn-primary"><i class="fas fa-edit ml-2"></i></a></td>
+            <td><a th:href="@{/admin/appointments/delete/{id}(id=${appointment.id})}" class="btn btn-primary"><i class="fas fa-times ml-2"></i></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
+<script th:replace="fragments/common :: script"></script>
+</body>
+</html>
